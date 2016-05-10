@@ -45,15 +45,4 @@ class ApplicationTest extends TestCase
             ->click('Register')
             ->seePageIs('/register');
     }
-
-    public function testCreateTodoItem()
-    {
-//
-//        $this->actingAs($user)->visit('/')
-//            ->type('this is my title', 'title')
-//            ->type('2016-05-10 01:57', 'date')
-//            ->type('this is the info of this item', 'info')
-//            ->click('submit')
-//            ->seePageIs('/');
-    }
 }
