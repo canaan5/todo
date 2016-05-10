@@ -28,6 +28,9 @@ class GoogleCalender implements CalenderInterface
         if ( \Session::has('access_token')) {
             $client->setAccessToken(\Session::get('access_token'));
 
+            if ( $client->isAccessTokenExpired() ) {
+                $client->refreshToken($client->getRefreshToken());
+            }
             // calender service instance
             $cal = new \Google_Service_Calendar($client);
 

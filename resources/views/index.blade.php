@@ -134,7 +134,7 @@
                                     <label for="info">Info About Event</label>
                                     <textarea name="info" id="info" class="form-control" rows="10"></textarea>
                                 </div>
-                                <input type="submit" value="Submit" class="btn btn-info center-block">
+                                <input type="submit" value="Submit" name="submit" class="btn btn-info center-block">
                             </form>
 
                         </div>
