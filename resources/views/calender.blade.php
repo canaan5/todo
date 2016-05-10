@@ -52,12 +52,11 @@
                         <div class="container-fluid">
 
                             <div class="margin-top-20"></div>
-
-                            @if(sizeof($events->getItems()) == 0 )
+                            @if(sizeof($events) == 0 )
                                 There is no item in your todo list
                             @endif
 
-                            @foreach($events->getItems() as $event)
+                            @foreach($events as $event)
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="headingOne">

@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/', 'Todo');
 
     // Sync with google calender
-    Route::get('/calender', 'Todo@sync');
+    Route::get('/calender', 'Todo@calender');
     Route::get('/sync/authenticate', 'Todo@authenticate');
 });
 

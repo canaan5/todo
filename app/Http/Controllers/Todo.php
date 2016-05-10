@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Canaan\Repo\Contracts\CalenderInterface;
 use Canaan\Repo\Contracts\TodoInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Session;
 
 class Todo extends Controller
 {
@@ -65,6 +63,7 @@ class Todo extends Controller
             'info' => $request->info,
         ];
 
+        // Save the new todo list item to the database
         if ( $this->model->create($data)) {
             return redirect('/')->with('message', "To-Do item {$request->title} Added");
         }
@@ -121,12 +120,25 @@ class Todo extends Controller
         return back()->with('message', 'Error Deleting Item');
     }
 
-    public function sync()
+    /**
+     * One way synchronization with google calender
+     *
+     * @return resource
+     */
+    public function calender()
     {
         $events = $this->calender->sync();
+
+        if($events instanceof RedirectResponse) {
+            return $events;
+        }
+
         return view('calender', compact('events'));
     }
 
+    /**
+     * @return bool
+     */
     public function authenticate()
     {
         return $this->calender->authenticate();
