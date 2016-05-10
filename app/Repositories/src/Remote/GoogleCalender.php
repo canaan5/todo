@@ -29,7 +29,7 @@ class GoogleCalender implements CalenderInterface
             $client->setAccessToken(\Session::get('access_token'));
 
             if ( $client->isAccessTokenExpired() ) {
-                $client->refreshToken($client->getRefreshToken());
+                return redirect('/sync/authenticate');
             }
             // calender service instance
             $cal = new \Google_Service_Calendar($client);
