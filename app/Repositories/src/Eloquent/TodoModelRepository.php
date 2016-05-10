@@ -8,19 +8,20 @@
 
 namespace Canaan\Repo\Eloquent;
 
-
-use App\Todo;
 use Canaan\Repo\Contracts\TodoInterface;
+use Illuminate\Foundation\Auth\User;
+
 
 class TodoModelRepository implements TodoInterface
 {
     /**
      * TodoModelRepository constructor.
-     * @param Todo $model
+     * @param User $model
      */
-    public function __construct(Todo $model)
+    public function __construct()
     {
-        $this->model = $model;
+        // Concrete injection of Authenticated user instance through the constructor
+        $this->model = \Auth::user();
     }
 
     /**
@@ -30,7 +31,7 @@ class TodoModelRepository implements TodoInterface
      */
     public function getAll()
     {
-        return $this->model->orderBy('date', 'asc')->get();
+        return $this->model->todo()->orderBy('date', 'asc')->get();
     }
 
     /**
@@ -41,7 +42,7 @@ class TodoModelRepository implements TodoInterface
      */
     public function get($id)
     {
-        return $this->model->find($id);
+        return $this->model->todo()->find($id);
     }
 
     /**
@@ -53,7 +54,7 @@ class TodoModelRepository implements TodoInterface
     public function create(array $input = [])
     {
         if(sizeof($input) > 0) {
-            return $this->model->create($input);
+            return $this->model->todo()->create($input);
         }
     }
 
@@ -66,7 +67,7 @@ class TodoModelRepository implements TodoInterface
     public function update($id, array $data = [])
     {
         if (sizeof($data) > 0) {
-            return $this->model->where('id', $id)->update($data);
+            return $this->model->todo()->where('id', $id)->update($data);
         }
     }
 
@@ -78,6 +79,6 @@ class TodoModelRepository implements TodoInterface
      */
     public function delete($id)
     {
-        return $this->model->where('id', $id)->delete();
+        return $this->model->todo()->where('id', $id)->delete();
     }
 }

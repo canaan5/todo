@@ -22,5 +22,6 @@ class TodoServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind("Canaan\Repo\Contracts\TodoInterface", "Canaan\Repo\Eloquent\TodoModelRepository");
+        $this->app->bind("Canaan\Repo\Contracts\CalenderInterface", "Canaan\Repo\Remote\GoogleCalender");
     }
 }

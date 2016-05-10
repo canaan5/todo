@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id'     => '1004779077781-44320dkpcejdhv835022qli2o4h6bp43.apps.googleusercontent.com',
+        'client_secret' => 'rMsiDgVMrZ_D1BRG6V3nXWm_',
+        'redirect'      => 'http://todo.dev/auth/google/callback'
+    ],
+
 ];

@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Canaan\Repo\Contracts\CalenderInterface;
 use Canaan\Repo\Contracts\TodoInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class Todo extends Controller
 {
-    public function __construct(TodoInterface $model)
+    /**
+     * @var TodoInterface $model
+     */
+    protected $model;
+
+    /**
+     * @var CalenderInterface $calender
+     */
+    protected $calender;
+
+
+    public function __construct(TodoInterface $model, CalenderInterface $calender)
     {
         $this->model = $model;
+        $this->calender = $calender;
     }
 
     /**
@@ -22,7 +37,7 @@ class Todo extends Controller
     public function index()
     {
         $todos = $this->model->getAll();
-        return view('index', compact('todos'));
+        return view('index', compact('todos', 'events'));
     }
 
     /**
@@ -104,5 +119,16 @@ class Todo extends Controller
         }
 
         return back()->with('message', 'Error Deleting Item');
+    }
+
+    public function sync()
+    {
+        $events = $this->calender->sync();
+        return view('calender', compact('events'));
+    }
+
+    public function authenticate()
+    {
+        return $this->calender->authenticate();
     }
 }

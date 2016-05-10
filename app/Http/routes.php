@@ -11,27 +11,16 @@
 |
 */
 
-use Illuminate\Support\Facades\Session;
-
 Route::group(['middleware' => 'auth'], function() {
 
     // Restful route for todo
     Route::get('/delete/{id}', 'Todo@destroy');
     Route::resource('/', 'Todo');
-    Route::get('/gc', function() {
 
-        $client = new Google_Client();
-        $client->setApplicationName('To-Do Application');
-        $client->setAuthConfigFile(base_path().'/client_secret.json');
-        $client->setAccessType('offline');
-
-        $cal = new Google_Service_Calendar($client);
-
-        $result = $cal->calendarList->listCalendarList();
-        echo '<pre>';
-        var_dump($result);
-
-    });
+    // Sync with google calender
+    Route::get('/calender', 'Todo@sync');
+    Route::get('/sync/authenticate', 'Todo@authenticate');
 });
+
 
 Route::auth();

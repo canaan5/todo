@@ -37,108 +37,62 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#todo" aria-controls="todo" role="tab" data-toggle="tab">To-Do</a></li>
-                    <li role="presentation" class=""><a href="/calender" aria-controls="sync" role="tab" data-toggle="">Google Calender</a></li>
-                    <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New</a></li>
+                    <li role="presentation" class=""><a href="/" aria-controls="todo" role="tab" data-toggle="">To-Do</a></li>
+                    <li role="presentation" class="active"><a href="/calender" aria-controls="sync" role="tab" data-toggle="tab">Google Calender</a></li>
+                    <li role="presentation"><a href="/#new" aria-controls="new" role="tab" data-toggle="">New</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
 
-                    {{--Todo List--}}
-                    <div role="tabpanel" class="tab-pane fade in active" id="todo">
+
+                    {{--Google Calender--}}
+                    <div role="tabpanel" class="tab-pane fade in active" id="sync">
 
                         <div class="container-fluid">
 
                             <div class="margin-top-20"></div>
 
-                            @if(sizeof($todos) < 1)
+                            @if(sizeof($events->getItems()) == 0 )
                                 There is no item in your todo list
                             @endif
 
-                            @foreach($todos as $todo)
+                            @foreach($events->getItems() as $event)
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="headingOne">
                                             <h4 class="panel-title">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $todo->id }}" aria-expanded="false" aria-controls="collapse{{ $todo->id }}">
-                                                            {{ $todo->title }}
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $event->id }}" aria-expanded="false" aria-controls="collapse{{ $event->id }}">
+                                                            {{ $event->getSummary() }}
                                                         </a>
                                                     </div>
 
                                                     <div class="col-sm-4">
                                                         <h6 class="pull-right">
-                                                            {{ date_format(new \DateTime($todo->date), 'D d Y @ H:i:s') }}
+                                                            {{ date_format(new \DateTime($event->start->dateTime), 'd, M Y @ H:i:s') }}
                                                         </h6>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <a href="/delete/{{ $todo->id }}" class="pull-right"><i class="glyphicon glyphicon-trash"></i></a>
                                                     </div>
                                                 </div>
                                             </h4>
                                         </div>
-                                        <div id="collapse{{ $todo->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div id="collapse{{ $event->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $event->id }}">
                                             <div class="panel-body">
                                                 <p>
-                                                    {{ $todo->info }}
+                                                    {{ $event->description }}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             @endforeach
-
                         </div>
 
                         <div class="margin-bottom-20"></div>
                     </div>
 
-
-
-                    {{--Google Calender--}}
-                    <div role="tabpanel" class="tab-pane fade" id="sync">
-
-
-
-                        <div class="margin-bottom-20"></div>
-                    </div>
-
-
-
-                    {{--Add new--}}
-                    <div role="tabpanel" class="tab-pane fade" id="new">
-                        <div class="container-fluid">
-
-                            <div class="margin-top-20"></div>
-
-                            <h3>Add New Item</h3>
-                            <form action="/" method="POST" class="form-horizontal">
-
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group date form_datetime" id="date">
-                                        <input type="text" class="form-control form_datetime" id="date" name="date" placeholder="Event Date">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="info">Info About Event</label>
-                                    <textarea name="info" id="info" class="form-control" rows="10"></textarea>
-                                </div>
-                                <input type="submit" value="Submit" class="btn btn-info center-block">
-                            </form>
-
-                        </div>
-                    </div>
                 </div>
 
                 <div class="clearfix margin-bottom-20"></div>
