@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by Canaan Etaigbenu
- * User: canaan5
- * Date: 5/10/16
- * Time: 1:13 AM
- */
 
-namespace Canaan\Repo\Contracts;
+namespace Canaan\Contracts;
 
 
 interface TodoInterface

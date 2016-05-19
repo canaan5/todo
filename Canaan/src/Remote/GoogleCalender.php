@@ -6,11 +6,11 @@
  * Time: 2:31 PM
  */
 
-namespace Canaan\Repo\Remote;
+namespace Canaan\Remote;
 
-use Canaan\Repo\Contracts\CalenderInterface;
+use Canaan\Contracts\CalenderSynchronizationInterface;
 
-class GoogleCalender implements CalenderInterface
+class GoogleCalender implements CalenderSynchronizationInterface
 {
 
     /**

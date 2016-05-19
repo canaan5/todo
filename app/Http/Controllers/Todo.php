@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Canaan\Repo\Contracts\CalenderInterface;
-use Canaan\Repo\Contracts\TodoInterface;
+use Canaan\Contracts\CalenderSynchronizationInterface;
+use Canaan\Contracts\TodoInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -16,12 +16,12 @@ class Todo extends Controller
     protected $model;
 
     /**
-     * @var CalenderInterface $calender
+     * @var CalenderSynchronizationInterface $calender
      */
     protected $calender;
 
 
-    public function __construct(TodoInterface $model, CalenderInterface $calender)
+    public function __construct(TodoInterface $model, CalenderSynchronizationInterface $calender)
     {
         $this->model = $model;
         $this->calender = $calender;

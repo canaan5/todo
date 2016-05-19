@@ -1,22 +1,13 @@
 <?php
-/**
- * Created by Canaan Etaigbenu
- * User: canaan5
- * Date: 5/10/16
- * Time: 1:28 AM
- */
+namespace Canaan\Persistance;
 
-namespace Canaan\Repo\Eloquent;
-
-use Canaan\Repo\Contracts\TodoInterface;
-use Illuminate\Foundation\Auth\User;
+use Canaan\Contracts\TodoInterface;
 
 
 class TodoModelRepository implements TodoInterface
 {
     /**
      * TodoModelRepository constructor.
-     * @param User $model
      */
     public function __construct()
     {

@@ -13,11 +13,11 @@
 
 Route::group(['middleware' => 'auth'], function() {
 
-    // Restful route for todo
+    // Restful routes
     Route::get('/delete/{id}', 'Todo@destroy');
     Route::resource('/', 'Todo');
 
-    // Sync with google calender
+    // Routes to Sync with google calender
     Route::get('/calender', 'Todo@calender');
     Route::get('/sync/authenticate', 'Todo@authenticate');
 });
