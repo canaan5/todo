@@ -2,17 +2,17 @@
 namespace Canaan\Persistance;
 
 use Canaan\Contracts\TodoInterface;
-
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class TodoModelRepository implements TodoInterface
 {
     /**
      * TodoModelRepository constructor.
      */
-    public function __construct()
+    public function __construct(Authenticatable $model)
     {
         // Concrete injection of Authenticated user instance through the constructor
-        $this->model = \Auth::user();
+        $this->model = $model;
     }
 
     /**
